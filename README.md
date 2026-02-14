@@ -74,7 +74,7 @@ This installs or updates Doom Emacs core and your Doom config.
 - Add cross-platform packages in `home/shared.nix`
 - Add macOS system settings in `darwin/configuration.nix`
 - Add macOS-only brew apps in `darwin/homebrew.nix`
-- Add host-specific tweaks in `home/darwin.nix` or `home/linux.nix`
+- Add platform-specific tweaks in `home/darwin.nix` or `home/linux.nix`
 
 ## Notes
 
