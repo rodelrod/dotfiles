@@ -2,5 +2,6 @@
 { config, pkgs, lib, ... }:
 
 {
-  # Placeholder for Linux-specific configuration
+  # Placeholder for other Linux-specific configuration
 }
+
