@@ -32,14 +32,16 @@
   # system.defaults.NSGlobalDomain.InitialKeyRepeat = 15;
 
   # Launchd services (system-level)
-  # Example: Emacs daemon as a launchd service
-  # launchd.user.agents.emacs = {
-  #   serviceConfig = {
-  #     ProgramArguments = [ "/Users/rodelrod/.nix-profile/bin/emacs" "--daemon" ];
-  #     RunAtLoad = true;
-  #     KeepAlive = true;
-  #   };
-  # };
+  # Auto-commit Org notes every 15 minutes using Ollama for commit messages.
+  launchd.user.agents.org-autocommit = {
+    serviceConfig = {
+      ProgramArguments = [ "/bin/bash" "/Users/rodelrod/dotfiles/scripts/org-autocommit.sh" ];
+      RunAtLoad = true;
+      StartInterval = 900;
+      StandardOutPath = "/Users/rodelrod/Library/Logs/org-autocommit.launchd.out.log";
+      StandardErrorPath = "/Users/rodelrod/Library/Logs/org-autocommit.launchd.err.log";
+    };
+  };
 
   # Network settings, keyboard layouts, etc. can go here
   # See: https://daiderd.com/nix-darwin/manual/index.html

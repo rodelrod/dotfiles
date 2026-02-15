@@ -62,6 +62,43 @@ After rebuild/switch, run:
 
 This installs or updates Doom Emacs core and your Doom config.
 
+## Org auto-commit
+
+On macOS, a user launchd agent (`org-autocommit`) runs every 15 minutes and executes:
+
+```bash
+/Users/rodelrod/dotfiles/scripts/org-autocommit.sh
+```
+
+The script stages all changes in `~/Org`, asks Ollama (`qwen2.5:14b`) for a notes-focused commit message, and commits automatically when changes exist.
+
+### Ollama model setup
+
+Before using auto-commit, make sure Ollama is running and the model is available:
+
+```bash
+# start Ollama server
+brew services start ollama
+
+# pull model used by the script
+ollama pull qwen2.5:14b
+
+# verify Ollama and model availability
+ollama ps
+ollama list | rg 'qwen2.5:14b'
+```
+
+Optional environment variables:
+
+- `ORG_AUTOCOMMIT_ORG_DIR` (default: `~/Org`)
+- `ORG_AUTOCOMMIT_MODEL` (default: `qwen2.5:14b`)
+- `ORG_AUTOCOMMIT_HOSTNAME_LABEL` (default: output of `hostname -s`)
+- `ORG_AUTOCOMMIT_TITLE_MAX_LEN` (default: `50`; prompt hint for model title length, not enforced by script)
+- `ORG_AUTOCOMMIT_MAX_DIFF_FILES` (default: `12`)
+- `ORG_AUTOCOMMIT_MAX_DIFF_LINES_PER_FILE` (default: `80`)
+- `ORG_AUTOCOMMIT_DRY_RUN=1` (generate/log message without committing)
+- `ORG_AUTOCOMMIT_PUSH=1` (push after commit)
+
 ## Repo layout
 
 - `flake.nix`: outputs, hosts, module wiring
