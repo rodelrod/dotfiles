@@ -62,6 +62,16 @@ After rebuild/switch, run:
 
 This installs or updates Doom Emacs core, your Doom config, and clones/updates `~/Org`.
 
+## Neovim (LazyVim)
+
+Neovim is managed by Home Manager with a LazyVim starter config under `config/nvim`.
+
+After applying your Nix config, start Neovim once to bootstrap plugins:
+
+```bash
+nvim
+```
+
 ## Org auto-commit
 
 On macOS, a user launchd agent (`org-autocommit`) runs every 15 minutes and executes:

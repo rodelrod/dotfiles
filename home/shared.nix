@@ -60,6 +60,15 @@ in
     };
   };
 
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+    viAlias = true;
+    vimAlias = true;
+    withNodeJs = true;
+    withPython3 = true;
+  };
+
 
   home.packages = with pkgs; [
     # CLI tools (cross-platform via Nix)
@@ -68,7 +77,6 @@ in
     fzf
     graphviz
     htop
-    neovim
     nodejs
     pandoc
     pdftk
@@ -79,7 +87,15 @@ in
     wget
   ];
 
-  xdg.configFile."vim/vimrc".source = ../config/vim/vimrc;
+  xdg.configFile."nvim/init.lua".source = ../config/nvim/init.lua;
+  xdg.configFile."nvim/lua/config" = {
+    source = ../config/nvim/lua/config;
+    recursive = true;
+  };
+  xdg.configFile."nvim/lua/plugins" = {
+    source = ../config/nvim/lua/plugins;
+    recursive = true;
+  };
 
   # Doom Emacs: install/update via scripts/post-install.sh after darwin-rebuild.
 }
