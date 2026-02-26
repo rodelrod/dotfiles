@@ -13,6 +13,42 @@ in
 
   programs.git.enable = true;
 
+  programs.tmux = {
+    enable = true;
+    terminal = "screen-256color";
+    shortcut = "a"; # Changes prefix to Ctrl-a
+    baseIndex = 1;
+    keyMode = "vi";
+    mouse = true;
+    focusEvents = true;
+    aggressiveResize = true;
+    escapeTime = 0;
+    historyLimit = 50000;
+
+    extraConfig = builtins.readFile ../config/tmux/tmux.conf;
+
+    plugins = with pkgs.tmuxPlugins; [
+      sensible
+      {
+        plugin = dracula;
+        extraConfig = ''
+          set -g @dracula-plugins " "  # Don't show anything on bottom right (empty string shows everything)
+          set -g @dracula-show-powerline true
+          set -g @dracula-show-flags true
+          set -g @dracula-show-left-icon session  # it can accept session, smiley, window, or any character.
+          set -g @dracula-border-constrast true
+        '';
+      }
+      {
+        plugin = resurrect;
+        extraConfig = ''
+          set -g @resurrect-strategy-nvim 'session'
+          set -g @resurrect-strategy-vim 'session'
+        '';
+      }
+    ];
+  };
+
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -38,7 +74,6 @@ in
     pdftk
     pwgen
     ripgrep
-    tmux
     tree
     uv
     wget
