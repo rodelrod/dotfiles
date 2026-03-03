@@ -78,10 +78,13 @@ in
     graphviz
     htop
     nodejs
+    nodePackages.typescript
+    nodePackages.typescript-language-server
     qpdf
     pandoc
     pdftk
     pwgen
+    pyright
     ripgrep
     tree
     uv
