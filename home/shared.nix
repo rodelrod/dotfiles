@@ -78,6 +78,7 @@ in
     graphviz
     htop
     nodejs
+    qpdf
     pandoc
     pdftk
     pwgen
