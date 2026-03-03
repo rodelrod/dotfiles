@@ -58,6 +58,10 @@ in
       gs = "git status";
       doom = "${doomCorePath}/bin/doom";
     };
+    envExtra = ''
+      # Local machine-only secrets and overrides.
+      [[ -f ~/.zshenv.local ]] && source ~/.zshenv.local
+    '';
   };
 
   programs.neovim = {
