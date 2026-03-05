@@ -62,6 +62,21 @@ After rebuild/switch, run:
 
 This installs or updates Doom Emacs core, your Doom config, and clones/updates `~/Org`.
 
+## Karabiner (Complex Modifications)
+
+Complex modification JSON files are tracked in this repo and installed via Home Manager to:
+
+- `~/.config/karabiner/assets/complex_modifications/`
+
+`karabiner.json` is intentionally **not** tracked or managed in this repo.
+
+After applying your macOS config, enable the rules you want in Karabiner-Elements UI:
+
+1. Open Karabiner-Elements.
+2. Go to `Complex Modifications`.
+3. Click `Add predefined rule`.
+4. Enable the rules you want (for example: Both Shifts Toggle Caps Lock, Right Option Hyper, Disable Cmd-H).
+
 ## Neovim (LazyVim)
 
 Neovim is managed by Home Manager with a LazyVim starter config under `config/nvim`.

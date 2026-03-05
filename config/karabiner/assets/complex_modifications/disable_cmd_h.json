@@ -1,0 +1,21 @@
+{
+  "title": "Disable Cmd-H",
+  "rules": [
+    {
+      "description": "Disable Command+H (Hide application)",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "h",
+            "modifiers": {
+              "mandatory": ["command"],
+              "optional": ["any"]
+            }
+          },
+          "to": []
+        }
+      ]
+    }
+  ]
+}

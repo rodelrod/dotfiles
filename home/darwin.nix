@@ -1,6 +1,12 @@
 { config, pkgs, lib, ... }:
 
 {
+  # Install reusable Karabiner complex modifications, but leave karabiner.json unmanaged.
+  xdg.configFile."karabiner/assets/complex_modifications" = {
+    source = ../config/karabiner/assets/complex_modifications;
+    recursive = true;
+  };
+
   # Restart Ollama service after Homebrew activation (replaces restart_service: true)
   home.activation.restartOllama = lib.mkAfter ''
     if command -v brew >/dev/null 2>&1; then
