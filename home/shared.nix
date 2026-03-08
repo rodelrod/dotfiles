@@ -62,6 +62,10 @@ in
       # Local machine-only secrets and overrides.
       [[ -f ~/.zshenv.local ]] && source ~/.zshenv.local
     '';
+    initContent = ''
+      # Local machine-only secrets and overrides.
+      [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
+    '';
   };
 
   programs.neovim = {
