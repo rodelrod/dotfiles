@@ -32,6 +32,20 @@ local function focus_window(win)
 	return true
 end
 
+local function first_standard_window(app)
+	if not app then
+		return nil
+	end
+
+	for _, win in ipairs(app:allWindows() or {}) do
+		if win:isStandard() then
+			return win
+		end
+	end
+
+	return nil
+end
+
 local function focus_window_in_focused_space_by_name(app_name)
 	local app = hs.application.get(app_name)
 	local win = window_in_focused_space(app)
@@ -116,13 +130,14 @@ function M.finder_focus_or_new()
 		return
 	end
 
+	if focus_window(first_standard_window(app)) then
+		return
+	end
+
 	hs.osascript.applescript([[
     tell application "Finder"
       activate
-      try
-        reopen
-      end try
-      make new Finder window
+      make new Finder window to (path to home folder)
     end tell
   ]])
 end
