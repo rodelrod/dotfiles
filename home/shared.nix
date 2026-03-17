@@ -2,6 +2,11 @@
 
 let
   doomCorePath = "${config.home.homeDirectory}/.config/emacs";
+  orgTexlive = pkgs.texlive.combine {
+    base = pkgs.texlive."scheme-small";
+    wrapfig = pkgs.texlive.wrapfig;
+    captOf = pkgs.texlive."capt-of";
+  };
 in
 {
   home.stateVersion = "24.05";
@@ -94,6 +99,7 @@ in
     qpdf
     pandoc
     pdftk
+    orgTexlive
     postgresql
     pwgen
     pyright
