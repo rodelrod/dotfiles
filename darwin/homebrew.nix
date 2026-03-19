@@ -35,6 +35,7 @@
       "cursor"
       "dbeaver-community"
       "discord"
+      "ghostty"
       "google-chrome"
       "hammerspoon"
       "karabiner-elements"

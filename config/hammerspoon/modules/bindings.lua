@@ -3,7 +3,7 @@ local M = {}
 function M.setup(app_focus)
 	-- Ctrl-shift + Number bindings for left-handed access
 	hs.hotkey.bind({ "ctrl", "shift" }, "1", app_focus.focus_or_launch_emacs)
-	hs.hotkey.bind({ "ctrl", "shift" }, "2", function() app_focus.focus_or_launch_with_cmd_n("Terminal") end)
+	hs.hotkey.bind({ "ctrl", "shift" }, "2", function() app_focus.focus_or_launch_with_cmd_n("Ghostty") end)
 	hs.hotkey.bind({ "ctrl", "shift" }, "3", app_focus.safari_focus_or_new_window)
 	hs.hotkey.bind({ "ctrl", "shift" }, "4", app_focus.finder_focus_or_new)
 	hs.hotkey.bind({ "ctrl", "shift" }, "5", function() app_focus.focus_or_launch("ChatGPT") end)
@@ -14,7 +14,7 @@ function M.setup(app_focus)
 	local hyper = { "cmd", "alt", "ctrl", "shift" }
 
 	hs.hotkey.bind(hyper, "E", app_focus.focus_or_launch_emacs)
-	hs.hotkey.bind(hyper, "T", function() app_focus.focus_or_launch_with_cmd_n("Terminal") end)
+	hs.hotkey.bind(hyper, "T", function() app_focus.focus_or_launch_with_cmd_n("Ghostty") end)
 	hs.hotkey.bind(hyper, "S", app_focus.safari_focus_or_new_window)
 	hs.hotkey.bind(hyper, "F", app_focus.finder_focus_or_new)
 	hs.hotkey.bind(hyper, "G", function() app_focus.focus_or_launch_with_cmd_n("Google Chrome") end)
