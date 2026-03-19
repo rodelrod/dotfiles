@@ -118,6 +118,7 @@ in
     source = ../config/nvim/lua/plugins;
     recursive = true;
   };
+  xdg.configFile."ghostty/config".source = ../config/ghostty/config;
 
   # Doom Emacs: install/update via scripts/post-install.sh after darwin-rebuild.
 }
