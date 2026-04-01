@@ -6,6 +6,7 @@ Nix flake-based dotfiles for macOS (`nix-darwin` + Home Manager) and Linux (Home
 
 - `kubrick`: `aarch64-darwin` (macOS)
 - `xenakis`: `x86_64-linux`
+- `ramiro`: `x86_64-linux`
 
 ## What this manages
 
