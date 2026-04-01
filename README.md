@@ -89,6 +89,16 @@ After applying your macOS config:
 2. If prompted, grant Accessibility permission in macOS settings.
 3. Use the Hammerspoon menu bar icon and click `Reload Config`.
 
+## Git
+
+Create a `~/.gitconfig.local` file with the user you want:
+
+```ini
+[user]
+  name = UserName
+  email = user@example.com
+```
+
 ## Neovim (LazyVim)
 
 Neovim is managed by Home Manager with a LazyVim starter config under `config/nvim`.

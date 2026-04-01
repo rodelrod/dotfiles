@@ -75,6 +75,13 @@
           hostConfigModule = ./home/linux.nix;
           cudaSupportIfApplies = { cudaSupport = true; };
         };
+        ramiro = mkLinuxSystem {
+          system = "x86_64-linux";
+          username = "ramiro";
+          homeDirectory = "/home/ramiro";
+          hostConfigModule = ./home/linux.nix;
+          cudaSupportIfApplies = { cudaSupport = false; };
+        };
       };
     };
 }

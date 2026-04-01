@@ -2,6 +2,12 @@
 { config, pkgs, lib, ... }:
 
 {
-  # Placeholder for other Linux-specific configuration
+  fonts.fontconfig.enable = true;
+
+  home.packages = with pkgs; [
+    nerd-fonts.jetbrains-mono
+    source-code-pro
+    source-sans
+  ];
 }
 

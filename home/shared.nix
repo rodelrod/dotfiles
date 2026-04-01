@@ -14,12 +14,20 @@ in
     "$HOME/.local/bin"
   ];
 
+  programs.home-manager.enable = true;
+
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
   };
 
-  programs.git.enable = true;
+  programs.git = {
+    enable = true;
+
+    settings = {
+      include.path = "${config.home.homeDirectory}/.gitconfig.local";
+    };
+  };
 
   programs.fzf = {
     enable = true;
