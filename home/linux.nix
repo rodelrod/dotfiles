@@ -14,6 +14,7 @@
     nix
     gcc
     gnumake
+    emacs-gtk
     nerd-fonts.jetbrains-mono
     source-code-pro
     source-sans
