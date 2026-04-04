@@ -93,6 +93,12 @@ abort_with_notification() {
   exit 1
 }
 
+abort_rebase_if_needed() {
+  if has_in_progress_operation; then
+    git_org rebase --abort >> "$RUN_LOG" 2>&1 || true
+  fi
+}
+
 has_worktree_changes() {
   [[ -n "$(git_org status --short --untracked-files=normal 2>/dev/null)" ]]
 }
@@ -350,10 +356,15 @@ run_full_sync_mode() {
   fi
 
   if (( AHEAD_COUNT > 0 && BEHIND_COUNT > 0 )); then
-    abort_with_notification "Org sync aborted: local branch diverged from ${UPSTREAM_REF}."
-  fi
-
-  if (( BEHIND_COUNT > 0 )); then
+    if [[ "$DRY_RUN" == "1" ]]; then
+      log "Dry run enabled; would run git pull --rebase."
+    elif git_org pull --rebase >> "$RUN_LOG" 2>&1; then
+      log "Rebase pull completed successfully."
+    else
+      abort_rebase_if_needed
+      abort_with_notification "Org sync aborted: rebase pull failed for $repo_root."
+    fi
+  elif (( BEHIND_COUNT > 0 )); then
     if [[ "$DRY_RUN" == "1" ]]; then
       log "Dry run enabled; would run git pull --ff-only."
     elif git_org pull --ff-only >> "$RUN_LOG" 2>&1; then

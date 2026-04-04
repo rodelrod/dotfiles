@@ -178,10 +178,11 @@ Schedules:
 - `git fetch origin`
 - abort with a local notification if the repo is conflicted, mid-rebase/merge/cherry-pick, or dirty while behind upstream
 - `git pull --ff-only` when the repo is clean and behind
+- `git pull --rebase` when the repo has both local commits and remote commits
 - auto-commit local changes with an Ollama-generated Org-focused commit message when the repo is not behind
 - `git push origin` only when the branch is ahead and not diverged
 
-It never runs a plain `git pull`, never auto-merges, and never auto-rebases.
+It never runs a plain `git pull` and never creates merge commits automatically.
 
 ### Ollama model setup
 
