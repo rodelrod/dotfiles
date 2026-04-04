@@ -35,14 +35,35 @@ in
   # system.defaults.NSGlobalDomain.InitialKeyRepeat = 15;
 
   # Launchd services (system-level)
-  # Auto-commit Org notes every 15 minutes using Ollama for commit messages.
+  # Commit local Org edits every 15 minutes for fine-grained history.
   launchd.user.agents.org-autocommit = {
     serviceConfig = {
       ProgramArguments = [ "/bin/bash" "${homeDir}/dotfiles/scripts/org-autocommit.sh" ];
+      EnvironmentVariables = {
+        ORG_AUTOCOMMIT_MODE = "commit-only";
+        ORG_AUTOCOMMIT_LOG_DIR = "${homeDir}/Library/Logs/org-autocommit/commit";
+      };
       RunAtLoad = true;
       StartInterval = 900;
       StandardOutPath = "${homeDir}/Library/Logs/org-autocommit/org-autocommit.launchd.out.log";
       StandardErrorPath = "${homeDir}/Library/Logs/org-autocommit/org-autocommit.launchd.err.log";
+    };
+  };
+
+  # Pull/push Org notes once per day with a strict fast-forward-only workflow.
+  launchd.user.agents.org-autosync = {
+    serviceConfig = {
+      ProgramArguments = [ "/bin/bash" "${homeDir}/dotfiles/scripts/org-autocommit.sh" ];
+      EnvironmentVariables = {
+        ORG_AUTOCOMMIT_MODE = "full-sync";
+        ORG_AUTOCOMMIT_LOG_DIR = "${homeDir}/Library/Logs/org-autocommit/sync";
+      };
+      StartCalendarInterval = {
+        Hour = 9;
+        Minute = 0;
+      };
+      StandardOutPath = "${homeDir}/Library/Logs/org-autocommit/org-autosync.launchd.out.log";
+      StandardErrorPath = "${homeDir}/Library/Logs/org-autocommit/org-autosync.launchd.err.log";
     };
   };
 

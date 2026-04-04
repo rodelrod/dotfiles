@@ -154,19 +154,38 @@ Optional (for DBeaver/TCP login):
 psql -d postgres -c "ALTER ROLE \"$USER\" PASSWORD 'change-me';"
 ```
 
-## Org auto-commit
+## Org auto-sync
 
-On macOS, a user launchd agent (`org-autocommit`) runs every 15 minutes and executes:
+On macOS, two user launchd agents execute the same script with different modes:
 
 ```bash
 /Users/rodelrod/dotfiles/scripts/org-autocommit.sh
 ```
 
-The script stages all changes in `~/Org`, asks Ollama (`qwen2.5:14b`) for a notes-focused commit message, and commits automatically when changes exist.
+Schedules:
+
+- `org-autocommit`: runs on login and every 15 minutes with `ORG_AUTOCOMMIT_MODE=commit-only`
+- `org-autosync`: runs daily at 09:00 with `ORG_AUTOCOMMIT_MODE=full-sync`
+
+`commit-only` mode:
+
+- stages and commits local changes in `~/Org`
+- never fetches, pulls, or pushes
+- aborts if the repo is already conflicted or mid-merge/rebase/cherry-pick
+
+`full-sync` mode:
+
+- `git fetch origin`
+- abort with a local notification if the repo is conflicted, mid-rebase/merge/cherry-pick, or dirty while behind upstream
+- `git pull --ff-only` when the repo is clean and behind
+- auto-commit local changes with an Ollama-generated Org-focused commit message when the repo is not behind
+- `git push origin` only when the branch is ahead and not diverged
+
+It never runs a plain `git pull`, never auto-merges, and never auto-rebases.
 
 ### Ollama model setup
 
-Before using auto-commit, make sure Ollama is running and the model is available:
+Before using auto-sync, make sure Ollama is running and the model is available:
 
 ```bash
 # start Ollama server
@@ -185,11 +204,11 @@ Optional environment variables:
 - `ORG_AUTOCOMMIT_ORG_DIR` (default: `~/Org`)
 - `ORG_AUTOCOMMIT_MODEL` (default: `qwen2.5:14b`)
 - `ORG_AUTOCOMMIT_HOSTNAME_LABEL` (default: output of `hostname -s`)
+- `ORG_AUTOCOMMIT_MODE` (`commit-only` or `full-sync`; default: `full-sync`)
 - `ORG_AUTOCOMMIT_TITLE_MAX_LEN` (default: `50`; prompt hint for model title length, not enforced by script)
 - `ORG_AUTOCOMMIT_MAX_DIFF_FILES` (default: `12`)
 - `ORG_AUTOCOMMIT_MAX_DIFF_LINES_PER_FILE` (default: `80`)
-- `ORG_AUTOCOMMIT_DRY_RUN=1` (generate/log message without committing)
-- `ORG_AUTOCOMMIT_PUSH=1` (push after commit)
+- `ORG_AUTOCOMMIT_DRY_RUN=1` (log the pull/commit/push actions it would take without mutating the repo)
 
 ## Repo layout
 
