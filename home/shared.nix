@@ -6,6 +6,7 @@ let
     base = pkgs.texlive."scheme-small";
     wrapfig = pkgs.texlive.wrapfig;
     captOf = pkgs.texlive."capt-of";
+    dvisvgm = pkgs.texlive.dvisvgm;
   };
 in
 {
