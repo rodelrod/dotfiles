@@ -1,0 +1,35 @@
+{
+  "title": "Built-in ISO Section Key as Grave",
+  "rules": [
+    {
+      "description": "Built-in keyboard Option+§/± key → Option+`~ key",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "non_us_backslash",
+            "modifiers": {
+              "mandatory": ["option"],
+              "optional": ["shift", "control", "caps_lock", "fn"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "grave_accent_and_tilde"
+            }
+          ],
+          "conditions": [
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "is_built_in_keyboard": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
