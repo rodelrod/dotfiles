@@ -141,6 +141,7 @@ in
     nodejs
     nodePackages.typescript
     nodePackages.typescript-language-server
+    plantuml
     qpdf
     pandoc
     pdftk
