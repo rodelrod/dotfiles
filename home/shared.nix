@@ -89,6 +89,7 @@ in
       z = "cd";
       gs = "git status";
       doom = "${doomCorePath}/bin/doom";
+      new-nix-project = "${config.home.homeDirectory}/dotfiles/scripts/new-nix-project.sh";
     };
     envExtra = ''
       # Local machine-only secrets and overrides.

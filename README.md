@@ -53,6 +53,16 @@ home-manager switch --flake .#xenakis
 nix flake update
 ```
 
+## New project bootstrap
+
+Create a Nix + direnv project and copy the AI project setup preferences:
+
+```bash
+new-nix-project my-project
+```
+
+Without an argument, `new-nix-project` initializes the current directory.
+
 ## Post-install
 
 After rebuild/switch, run:
@@ -217,6 +227,7 @@ Optional environment variables:
 - `darwin/`: nix-darwin + Homebrew config
 - `home/`: shared and host-specific Home Manager modules
 - `scripts/`: helper scripts
+- `templates/`: reusable project templates and seed files
 
 ## Customization
 
