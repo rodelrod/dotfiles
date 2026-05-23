@@ -1,10 +1,11 @@
 # dotfiles
 
-Nix flake-based dotfiles for macOS (`nix-darwin` + Home Manager) and Linux (Home Manager only).
+Nix flake-based dotfiles for macOS (`nix-darwin` + Home Manager or Home Manager only) and Linux (Home Manager only).
 
 ## Hosts
 
 - `kubrick`: `aarch64-darwin` (macOS)
+- `oxum`: `aarch64-darwin` (macOS, Home Manager only)
 - `xenakis`: `x86_64-linux`
 - `ramiro`: `x86_64-linux`
 
@@ -13,18 +14,18 @@ Nix flake-based dotfiles for macOS (`nix-darwin` + Home Manager) and Linux (Home
 - Shell + CLI tools (`home/shared.nix`)
 - Git + Zsh config (Home Manager)
 - macOS system defaults (`darwin/configuration.nix`)
-- Homebrew taps/formulas/casks on macOS (`darwin/homebrew.nix`)
-- Host-specific activation hooks (`home/darwin.nix`, `home/linux.nix`)
+- Homebrew taps/formulas/casks on macOS (`homebrew/packages.nix`)
+- Host-specific activation hooks (`home/darwin.nix`, `home/linux.nix`, `home/oxum.nix`)
 
 ## Prerequisites
 
 - Nix installed with flakes enabled
 - Git
-- macOS only: Homebrew (managed through nix-darwin module settings)
+- macOS only: Homebrew (`kubrick` is managed through nix-darwin; `oxum` uses a generated Brewfile)
 
 ## Bootstrap
 
-### macOS (`kubrick`)
+### macOS with nix-darwin (`kubrick`)
 
 ```bash
 # first run (before darwin-rebuild exists in PATH)
@@ -33,6 +34,26 @@ sudo nix --extra-experimental-features "nix-command flakes" run nix-darwin -- sw
 # subsequent runs
 sudo darwin-rebuild switch --flake .#kubrick
 ```
+
+### macOS without admin rights (`oxum`)
+
+Apply the Home Manager profile:
+
+```bash
+home-manager switch --flake .#oxum
+```
+
+This writes a Brewfile to:
+
+- `~/.config/homebrew/Brewfile`
+
+Apply Homebrew packages manually when appropriate:
+
+```bash
+brew bundle --file ~/.config/homebrew/Brewfile
+```
+
+The generated Brewfile installs casks into `~/Applications` and excludes casks tracked as personal or likely to require admin privileges.
 
 ### Linux (`xenakis`)
 
@@ -43,8 +64,11 @@ home-manager switch --flake .#xenakis
 ## Daily usage
 
 ```bash
-# apply macOS config
+# apply macOS nix-darwin config
 sudo darwin-rebuild switch --flake .#kubrick
+
+# apply macOS Home Manager-only config
+home-manager switch --flake .#oxum
 
 # apply Linux config
 home-manager switch --flake .#xenakis
@@ -166,10 +190,10 @@ psql -d postgres -c "ALTER ROLE \"$USER\" PASSWORD 'change-me';"
 
 ## Org auto-sync
 
-On macOS, two user launchd agents execute the same script with different modes:
+On `kubrick`, two nix-darwin user launchd agents execute the same script with different modes:
 
 ```bash
-/Users/rodelrod/dotfiles/scripts/org-autocommit.sh
+~/dotfiles/scripts/org-autocommit.sh
 ```
 
 Schedules:
@@ -224,7 +248,8 @@ Optional environment variables:
 ## Repo layout
 
 - `flake.nix`: outputs, hosts, module wiring
-- `darwin/`: nix-darwin + Homebrew config
+- `darwin/`: nix-darwin system config for admin-capable macOS hosts
+- `homebrew/`: shared Homebrew package inventory
 - `home/`: shared and host-specific Home Manager modules
 - `scripts/`: helper scripts
 - `templates/`: reusable project templates and seed files
@@ -233,9 +258,10 @@ Optional environment variables:
 
 - Add cross-platform packages in `home/shared.nix`
 - Add macOS system settings in `darwin/configuration.nix`
-- Add macOS-only brew apps in `darwin/homebrew.nix`
-- Add platform-specific tweaks in `home/darwin.nix` or `home/linux.nix`
+- Add macOS-only Homebrew taps, formulas, and casks in `homebrew/packages.nix`
+- Add nix-darwin Homebrew activation behavior in `darwin/homebrew.nix`
+- Add platform-specific Home Manager tweaks in `home/darwin.nix`, `home/linux.nix`, or `home/oxum.nix`
 
 ## Notes
 
-- Hostnames, usernames, and home paths are defined in `flake.nix`
+- Flake profile names, usernames, and home paths are defined in `flake.nix`; profile names do not need to match the machine hostname.

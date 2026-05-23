@@ -2,6 +2,9 @@
 # Only for GUI apps and macOS-specific tools that need system integration
 { config, pkgs, lib, ... }:
 
+let
+  packages = import ../homebrew/packages.nix;
+in
 {
   homebrew = {
     enable = true;
@@ -13,45 +16,10 @@
       cleanup = "none";
     };
 
-    taps = [
-      "d12frosted/emacs-plus"
-    ];
+    taps = packages.taps;
 
-    brews = [
-      # macOS-specific CLI tools that need system integration
-      "pngpaste" # For doom-emacs - needs macOS clipboard access
-      "ollama" # If you prefer Homebrew version
-      # Emacs with native-comp (macOS-specific patches)
-      {
-        name = "emacs-plus@29";
-        args = [ "with-native-comp" ];
-      }
-    ];
+    brews = packages.brews;
 
-    casks = [
-      # GUI apps
-      "alt-tab"
-      "codex"
-      "cursor"
-      "dbeaver-community"
-      "discord"
-      "ghostty"
-      "google-chrome"
-      "hammerspoon"
-      "karabiner-elements"
-      "libreoffice"
-      "meld"
-      "monitorcontrol"
-      "portfolioperformance"
-      "raycast"
-      "rectangle-pro"
-      "ukelele"
-      "visual-studio-code"
-      "xmind"
-      # Fonts
-      "font-jetbrains-mono-nerd-font"
-      "font-source-code-pro"
-      "font-source-sans-3"
-    ];
+    casks = packages.casks ++ packages.personalCasks ++ packages.adminLikelyCasks;
   };
 }

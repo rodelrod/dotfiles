@@ -11,7 +11,6 @@
 
   outputs = { nixpkgs, home-manager, nix-darwin, ... }:
     let
-      # macOS system configuration (nix-darwin)
       mkDarwinSystem = { system, username, homeDirectory, hostConfigModule, extraDarwinModules ? [ ] }:
         nix-darwin.lib.darwinSystem {
           inherit system;
@@ -34,12 +33,11 @@
           ] ++ extraDarwinModules;
         };
 
-      # Linux user configuration (Home Manager only)
-      mkLinuxSystem = { system, username, homeDirectory, hostConfigModule, cudaSupportIfApplies }:
+      mkHomeManagerSystem = { system, username, homeDirectory, hostConfigModule, extraNixpkgsConfig ? { } }:
         home-manager.lib.homeManagerConfiguration {
           pkgs = import nixpkgs { 
             inherit system; 
-            config = cudaSupportIfApplies // { allowUnfree = true; };
+            config = extraNixpkgsConfig // { allowUnfree = true; };
           };
           modules = [
             ./home/home.nix
@@ -52,7 +50,6 @@
         };
 
     in {
-      # macOS system configuration
       darwinConfigurations = {
         kubrick = mkDarwinSystem {
           system = "aarch64-darwin";
@@ -66,21 +63,26 @@
         };
       };
 
-      # Linux user configurations
       homeConfigurations = {
-        xenakis = mkLinuxSystem {
+        oxum = mkHomeManagerSystem {
+          system = "aarch64-darwin";
+          username = "rodrigoeliseu";
+          homeDirectory = "/Users/rodrigoeliseu";
+          hostConfigModule = ./home/oxum.nix;
+        };
+        xenakis = mkHomeManagerSystem {
           system = "x86_64-linux";
           username = "rodelrod";
           homeDirectory = "/home/rodelrod";
           hostConfigModule = ./home/linux.nix;
-          cudaSupportIfApplies = { cudaSupport = true; };
+          extraNixpkgsConfig = { cudaSupport = true; };
         };
-        ramiro = mkLinuxSystem {
+        ramiro = mkHomeManagerSystem {
           system = "x86_64-linux";
           username = "ramiro";
           homeDirectory = "/home/ramiro";
           hostConfigModule = ./home/linux.nix;
-          cudaSupportIfApplies = { cudaSupport = false; };
+          extraNixpkgsConfig = { cudaSupport = false; };
         };
       };
     };
