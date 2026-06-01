@@ -20,6 +20,10 @@ in
 
     brews = packages.brews;
 
-    casks = packages.casks ++ packages.personalCasks ++ packages.adminLikelyCasks;
+    casks =
+      packages.casks
+      ++ packages.permissionSensitiveCasks
+      ++ packages.personalCasks
+      ++ packages.adminLikelyCasks;
   };
 }

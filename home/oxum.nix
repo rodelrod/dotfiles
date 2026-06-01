@@ -39,6 +39,13 @@ in
     ./darwin.nix
   ];
 
+  # Home Manager-only macOS host: make Nix and HM profile tools available in
+  # fresh terminals without relying on system-level nix-darwin shell setup.
+  home.sessionPath = [
+    "/nix/var/nix/profiles/default/bin"
+    "$HOME/.nix-profile/bin"
+  ];
+
   # Oxum is a non-admin work machine, so keep Homebrew quiet and install casks
   # into the user Applications folder by default.
   home.sessionVariables = {
