@@ -39,9 +39,20 @@ in
     ./darwin.nix
   ];
 
+  # Oxum is a non-admin work machine, so keep Homebrew quiet and install casks
+  # into the user Applications folder by default.
   home.sessionVariables = {
+    HOMEBREW_NO_AUTO_UPDATE = "1";
+    HOMEBREW_NO_ENV_HINTS = "1";
     HOMEBREW_CASK_OPTS = "--appdir=$HOME/Applications";
   };
+
+  # Homebrew was installed outside the default shell setup path on Oxum.
+  programs.zsh.initContent = lib.mkAfter ''
+    if [[ -x /opt/homebrew/bin/brew ]]; then
+      eval "$(/opt/homebrew/bin/brew shellenv)"
+    fi
+  '';
 
   xdg.configFile."homebrew/Brewfile".text = brewfile;
 }
