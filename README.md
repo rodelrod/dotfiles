@@ -53,7 +53,7 @@ Apply Homebrew packages manually when appropriate:
 brew bundle --file ~/.config/homebrew/Brewfile
 ```
 
-The generated Brewfile installs casks into `~/Applications` and excludes casks tracked as personal or likely to require admin privileges.
+The generated Brewfile installs shared and work casks into `~/Applications`.
 
 ### Linux (`xenakis`)
 
@@ -249,7 +249,7 @@ Optional environment variables:
 
 - `flake.nix`: outputs, hosts, module wiring
 - `darwin/`: nix-darwin system config for admin-capable macOS hosts
-- `homebrew/`: shared Homebrew package inventory
+- `homebrew/`: shared and host-specific Homebrew package inventory
 - `home/`: shared and host-specific Home Manager modules
 - `scripts/`: helper scripts
 - `templates/`: reusable project templates and seed files
@@ -258,7 +258,7 @@ Optional environment variables:
 
 - Add cross-platform packages in `home/shared.nix`
 - Add macOS system settings in `darwin/configuration.nix`
-- Add macOS-only Homebrew taps, formulas, and casks in `homebrew/packages.nix`
+- Add macOS-only Homebrew taps, formulas, and shared/personal/work casks in `homebrew/packages.nix`
 - Add nix-darwin Homebrew activation behavior in `darwin/homebrew.nix`
 - Add platform-specific Home Manager tweaks in `home/darwin.nix`, `home/linux.nix`, or `home/oxum.nix`
 

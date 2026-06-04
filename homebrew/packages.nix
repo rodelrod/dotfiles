@@ -5,15 +5,12 @@
 
   brews = [
     # macOS-specific CLI tools that need system integration
-    "pngpaste" # For doom-emacs - needs macOS clipboard access
-    "ollama" # If you prefer Homebrew version
-
-    # Emacs with native-comp support via libgccjit.
-    "emacs-plus@30"
+    "pngpaste"  # For doom-emacs - needs macOS clipboard access
+    "ollama"
+    "emacs-plus@30"  # Emacs with native-comp support via libgccjit.
   ];
 
-  casks = [
-    # GUI apps
+  sharedCasks = [
     "alt-tab"
     "cursor"
     "dbeaver-community"
@@ -29,24 +26,23 @@
     "font-jetbrains-mono-nerd-font"
     "font-source-code-pro"
     "font-source-sans-3"
-  ];
-
-  permissionSensitiveCasks = [
-    # Keep out of Oxum's manual Brewfile: these have Accessibility/TCC grants
-    # that were approved out-of-band on the work machine.
-    "codex"
-    "google-chrome"
-    "hammerspoon"
+    "font-symbols-only-nerd-font"
   ];
 
   personalCasks = [
+    "codex"
     "discord"
-    "portfolioperformance"
-  ];
-
-  adminLikelyCasks = [
+    "google-chrome"
+    "hammerspoon"
     "karabiner-elements"
     "monitorcontrol"
+    "portfolioperformance"
     "rectangle-pro"
+  ];
+
+  workCasks = [
+    "copilot-cli"
+    "kiro"
+    "kiro-cli"
   ];
 }

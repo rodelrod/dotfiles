@@ -30,7 +30,7 @@ let
     ++ [ "" ]
     ++ map brewLine packages.brews
     ++ [ "" ]
-    ++ map caskLine packages.casks
+    ++ map caskLine (packages.sharedCasks ++ packages.workCasks)
     ++ [ "" ]
   );
 in

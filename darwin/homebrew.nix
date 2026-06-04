@@ -21,9 +21,7 @@ in
     brews = packages.brews;
 
     casks =
-      packages.casks
-      ++ packages.permissionSensitiveCasks
-      ++ packages.personalCasks
-      ++ packages.adminLikelyCasks;
+      packages.sharedCasks
+      ++ packages.personalCasks;
   };
 }
