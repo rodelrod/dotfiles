@@ -1,3 +1,4 @@
 *.code-workspace
 .nvimlog
 config/nvim/.luarc.json
+.DS_Store
