@@ -132,6 +132,7 @@ in
 
   home.packages = with pkgs; [
     # CLI tools (cross-platform via Nix)
+    aha
     bat
     eza
     fd
@@ -147,6 +148,7 @@ in
     pandoc
     pdftk
     orgTexlive
+    pcre2
     postgresql
     pwgen
     pyright
