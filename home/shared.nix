@@ -90,6 +90,7 @@ in
       gs = "git status";
       doom = "${doomCorePath}/bin/doom";
       new-nix-project = "${config.home.homeDirectory}/dotfiles/scripts/new-nix-project.sh";
+      utfnow = "date -u +%Y%m%dT%H%M%S";
     };
     envExtra = ''
       # Local machine-only secrets and overrides.
