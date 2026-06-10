@@ -54,12 +54,35 @@ in
     HOMEBREW_CASK_OPTS = "--appdir=$HOME/Applications";
   };
 
-  # Homebrew was installed outside the default shell setup path on Oxum.
-  programs.zsh.initContent = lib.mkAfter ''
-    if [[ -x /opt/homebrew/bin/brew ]]; then
-      eval "$(/opt/homebrew/bin/brew shellenv)"
-    fi
-  '';
+  programs.zsh = {
+    profileExtra = lib.mkMerge [
+      (lib.mkOrder 500 ''
+        # Kiro CLI pre block. Keep at the top of this file.
+        [ -x ~/.local/bin/kiro-cli ] && eval "$(~/.local/bin/kiro-cli init zsh pre --rcfile zprofile)"
+      '')
+      (lib.mkOrder 1500 ''
+        # Kiro CLI post block. Keep at the bottom of this file.
+        [ -x ~/.local/bin/kiro-cli ] && eval "$(~/.local/bin/kiro-cli init zsh post --rcfile zprofile)"
+      '')
+    ];
+
+    initContent = lib.mkMerge [
+      (lib.mkOrder 500 ''
+        # Kiro CLI pre block. Keep at the top of this file.
+        [ -x ~/.local/bin/kiro-cli ] && eval "$(~/.local/bin/kiro-cli init zsh pre --rcfile zshrc)"
+      '')
+      (lib.mkAfter ''
+        # Homebrew was installed outside the default shell setup path on Oxum.
+        if [[ -x /opt/homebrew/bin/brew ]]; then
+          eval "$(/opt/homebrew/bin/brew shellenv)"
+        fi
+      '')
+      (lib.mkOrder 1500 ''
+        # Kiro CLI post block. Keep at the bottom of this file.
+        [ -x ~/.local/bin/kiro-cli ] && eval "$(~/.local/bin/kiro-cli init zsh post --rcfile zshrc)"
+      '')
+    ];
+  };
 
   xdg.configFile."homebrew/Brewfile".text = brewfile;
 }
