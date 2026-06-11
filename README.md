@@ -190,16 +190,22 @@ psql -d postgres -c "ALTER ROLE \"$USER\" PASSWORD 'change-me';"
 
 ## Org auto-sync
 
-On `kubrick`, two nix-darwin user launchd agents execute the same script with different modes:
+Two user launchd agents execute the same script with different modes:
 
 ```bash
 ~/dotfiles/scripts/org-autocommit.sh
 ```
 
+On `kubrick`, they are managed by nix-darwin. On `oxum`, where the user does
+not have admin rights, they are managed by Home Manager as per-user
+LaunchAgents.
+
 Schedules:
 
 - `org-autocommit`: runs on login and every 15 minutes with `ORG_AUTOCOMMIT_MODE=commit-only`
 - `org-autosync`: runs daily at 09:00 with `ORG_AUTOCOMMIT_MODE=full-sync`
+- `org-orisha-autocommit`: runs on login and every 15 minutes for `~/Org/notes/client/orisha`
+- `org-orisha-autosync`: runs daily at 09:05 for `~/Org/notes/client/orisha`
 
 `commit-only` mode:
 
@@ -217,6 +223,24 @@ Schedules:
 - `git push origin` only when the branch is ahead and not diverged
 
 It never runs a plain `git pull` and never creates merge commits automatically.
+
+Apply the Oxum LaunchAgents with:
+
+```bash
+home-manager switch --flake .#oxum
+```
+
+Home Manager writes the plists to `~/Library/LaunchAgents` and bootstraps them
+into the user launchd domain. Useful checks:
+
+```bash
+launchctl list | grep org-autocommit
+launchctl list | grep org-autosync
+launchctl list | grep org-orisha
+tail -f ~/Library/Logs/org-autocommit/org-autocommit.launchd.err.log
+tail -f ~/Library/Logs/org-autocommit/commit/org-autocommit.log
+tail -f ~/Library/Logs/org-autocommit/orisha-commit/org-autocommit.log
+```
 
 ### Ollama model setup
 
