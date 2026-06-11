@@ -1,2 +1,3 @@
 # Ghostty configuration managed by Home Manager.
 keybind = global:ctrl+f9=toggle_quick_terminal
+keybind = ctrl+minus=text:\x1f
