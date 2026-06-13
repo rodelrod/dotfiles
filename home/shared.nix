@@ -97,6 +97,8 @@ in
       [[ -f ~/.zshenv.local ]] && source ~/.zshenv.local
     '';
     initContent = ''
+      setopt extendedglob
+
       # Local machine-only secrets and overrides.
       [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
     '';
