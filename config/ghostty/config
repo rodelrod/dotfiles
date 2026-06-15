@@ -1,3 +1,5 @@
 # Ghostty configuration managed by Home Manager.
-keybind = global:ctrl+f9=toggle_quick_terminal
+keybind = global:ctrl+grave_accent=toggle_quick_terminal
 keybind = ctrl+minus=text:\x1f
+background-opacity = 0.92
+background-blur = 16
