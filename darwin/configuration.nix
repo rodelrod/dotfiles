@@ -44,7 +44,7 @@ in
         ORG_AUTOCOMMIT_LOG_DIR = "${homeDir}/Library/Logs/org-autocommit/commit";
       };
       RunAtLoad = true;
-      StartInterval = 900;
+      StartInterval = 1800;
       StandardOutPath = "${homeDir}/Library/Logs/org-autocommit/org-autocommit.launchd.out.log";
       StandardErrorPath = "${homeDir}/Library/Logs/org-autocommit/org-autocommit.launchd.err.log";
     };

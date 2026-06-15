@@ -134,7 +134,7 @@ in
     mode = "commit-only";
     schedule = {
       RunAtLoad = true;
-      StartInterval = 900;
+      StartInterval = 1800;
     };
   };
 
@@ -159,7 +159,7 @@ in
     mode = "commit-only";
     schedule = {
       RunAtLoad = true;
-      StartInterval = 900;
+      StartInterval = 1800;
     };
   };
 
