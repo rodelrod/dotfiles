@@ -11,7 +11,7 @@ LOG_DIR="${ORG_AUTOCOMMIT_LOG_DIR:-$HOME/Library/Logs/org-autocommit}"
 LOCK_DIR="${ORG_AUTOCOMMIT_LOCK_DIR:-/tmp/org-autocommit.lock}"
 MODE="${ORG_AUTOCOMMIT_MODE:-full-sync}"
 MAX_DIFF_FILES="${ORG_AUTOCOMMIT_MAX_DIFF_FILES:-12}"
-MAX_DIFF_LINES_PER_FILE="${ORG_AUTOCOMMIT_MAX_DIFF_LINES_PER_FILE:-80}"
+MAX_DIFF_LINES_PER_FILE="${ORG_AUTOCOMMIT_MAX_DIFF_LINES_PER_FILE:-150}"
 TITLE_MAX_LEN="${ORG_AUTOCOMMIT_TITLE_MAX_LEN:-50}"
 HOSTNAME_LABEL="${ORG_AUTOCOMMIT_HOSTNAME_LABEL:-$(hostname -s 2>/dev/null || hostname)}"
 DRY_RUN="${ORG_AUTOCOMMIT_DRY_RUN:-0}"
@@ -151,7 +151,7 @@ build_commit_prompt() {
 
     if [[ $changed_file_count -le $MAX_DIFF_FILES ]]; then
       diff_excerpts+="### $file"$'\n'
-      file_excerpt="$(git_org diff --cached --unified=0 -- "$file" | sed -n "1,${MAX_DIFF_LINES_PER_FILE}p")"
+      file_excerpt="$(git_org diff --cached --unified=5 -- "$file" | sed -n "1,${MAX_DIFF_LINES_PER_FILE}p")"
       if [[ -n "$file_excerpt" ]]; then
         diff_excerpts+="$file_excerpt"$'\n'
       else
