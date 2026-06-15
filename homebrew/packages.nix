@@ -35,6 +35,7 @@
     "google-chrome"
     "hammerspoon"
     "karabiner-elements"
+    "linearmouse"
     "monitorcontrol"
     "portfolioperformance"
     "rectangle-pro"
