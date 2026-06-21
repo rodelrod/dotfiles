@@ -137,6 +137,7 @@ in
     # CLI tools (cross-platform via Nix)
     aha
     bat
+    awscli2
     eza
     fd
     go
