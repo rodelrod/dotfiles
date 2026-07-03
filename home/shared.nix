@@ -99,6 +99,11 @@ in
     initContent = ''
       setopt extendedglob
 
+      # Ghostty sends ESC [ 3 ~ for forward delete; make ZLE consume it.
+      zmodload zsh/terminfo 2>/dev/null || true
+      [[ -n "''${terminfo[kdch1]}" ]] && bindkey "''${terminfo[kdch1]}" delete-char
+      bindkey "^[[3~" delete-char
+
       # Local machine-only secrets and overrides.
       [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
     '';
