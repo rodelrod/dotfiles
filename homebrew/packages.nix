@@ -8,6 +8,7 @@
     "pngpaste"  # For doom-emacs - needs macOS clipboard access
     "ollama"
     "emacs-plus@30"  # Emacs with native-comp support via libgccjit.
+    "gemini-cli"
   ];
 
   sharedCasks = [
