@@ -17,7 +17,7 @@
   home.activation.restartOllama = lib.mkAfter ''
     if command -v brew >/dev/null 2>&1; then
       echo "Restarting Ollama service via Homebrew..."
-      brew services restart ollama || true
+      brew services start ollama || brew services restart ollama || true
     fi
   '';
 
