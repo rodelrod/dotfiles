@@ -13,6 +13,7 @@
 
   sharedCasks = [
     "alt-tab"
+    "itsycal"
     "cursor"
     "dbeaver-community"
     "ghostty"
