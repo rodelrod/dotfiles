@@ -46,5 +46,6 @@
     "copilot-cli"
     "kiro"
     "kiro-cli"
+    "stats"
   ];
 }
