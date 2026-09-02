@@ -2,12 +2,11 @@
 
 let
   doomCorePath = "${config.home.homeDirectory}/.config/emacs";
-  orgTexlive = pkgs.texlive.combine {
-    base = pkgs.texlive."scheme-small";
-    wrapfig = pkgs.texlive.wrapfig;
-    captOf = pkgs.texlive."capt-of";
-    dvisvgm = pkgs.texlive.dvisvgm;
-  };
+  orgTexlive = pkgs.texliveSmall.withPackages (ps: [
+    ps.wrapfig
+    ps."capt-of"
+    ps.dvisvgm
+  ]);
 in
 {
   home.stateVersion = "24.05";
@@ -134,7 +133,8 @@ in
     viAlias = true;
     vimAlias = true;
     withNodeJs = true;
-    withPython3 = true;
+    withPython3 = false;
+    withRuby = false;
   };
 
 
@@ -150,8 +150,8 @@ in
     graphviz
     htop
     nodejs
-    nodePackages.typescript
-    nodePackages.typescript-language-server
+    typescript
+    typescript-language-server
     plantuml
     qpdf
     pandoc
