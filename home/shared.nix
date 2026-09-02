@@ -26,6 +26,7 @@ in
 
     settings = {
       include.path = "${config.home.homeDirectory}/.gitconfig.local";
+      init.defaultBranch = "main";
     };
   };
 
