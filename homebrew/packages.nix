@@ -16,6 +16,7 @@
     "itsycal"
     "cursor"
     "dbeaver-community"
+    "drawio"
     "ghostty"
     "hammerspoon"
     "libreoffice"
