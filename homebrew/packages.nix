@@ -19,6 +19,7 @@
     "drawio"
     "ghostty"
     "hammerspoon"
+    "intellij-idea"
     "libreoffice"
     "meld"
     "raycast"
