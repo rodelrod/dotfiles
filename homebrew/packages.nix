@@ -19,6 +19,7 @@
     "drawio"
     "ghostty"
     "hammerspoon"
+    "insomnia"
     "intellij-idea"
     "libreoffice"
     "meld"
