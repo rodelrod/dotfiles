@@ -163,6 +163,7 @@ in
     pwgen
     pyright
     ripgrep
+    scc
     tree
     uv
     wget
