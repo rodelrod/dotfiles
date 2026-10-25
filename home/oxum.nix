@@ -85,21 +85,28 @@ in
   };
 
   programs.zsh = {
+    # Kiro's PTY wrapper hides foreground commands from tmux's automatic naming.
     profileExtra = lib.mkMerge [
       (lib.mkOrder 500 ''
         # Kiro CLI pre block. Keep at the top of this file.
-        [ -x ~/.local/bin/kiro-cli ] && eval "$(~/.local/bin/kiro-cli init zsh pre --rcfile zprofile)"
+        if [[ -z "''${TMUX:-}" && -x ~/.local/bin/kiro-cli ]]; then
+          eval "$(~/.local/bin/kiro-cli init zsh pre --rcfile zprofile)"
+        fi
       '')
       (lib.mkOrder 1500 ''
         # Kiro CLI post block. Keep at the bottom of this file.
-        [ -x ~/.local/bin/kiro-cli ] && eval "$(~/.local/bin/kiro-cli init zsh post --rcfile zprofile)"
+        if [[ -z "''${TMUX:-}" && -x ~/.local/bin/kiro-cli ]]; then
+          eval "$(~/.local/bin/kiro-cli init zsh post --rcfile zprofile)"
+        fi
       '')
     ];
 
     initContent = lib.mkMerge [
       (lib.mkOrder 500 ''
         # Kiro CLI pre block. Keep at the top of this file.
-        [ -x ~/.local/bin/kiro-cli ] && eval "$(~/.local/bin/kiro-cli init zsh pre --rcfile zshrc)"
+        if [[ -z "''${TMUX:-}" && -x ~/.local/bin/kiro-cli ]]; then
+          eval "$(~/.local/bin/kiro-cli init zsh pre --rcfile zshrc)"
+        fi
       '')
       (lib.mkAfter ''
         # Homebrew was installed outside the default shell setup path on Oxum.
@@ -109,7 +116,9 @@ in
       '')
       (lib.mkOrder 1500 ''
         # Kiro CLI post block. Keep at the bottom of this file.
-        [ -x ~/.local/bin/kiro-cli ] && eval "$(~/.local/bin/kiro-cli init zsh post --rcfile zshrc)"
+        if [[ -z "''${TMUX:-}" && -x ~/.local/bin/kiro-cli ]]; then
+          eval "$(~/.local/bin/kiro-cli init zsh post --rcfile zshrc)"
+        fi
       '')
     ];
   };
