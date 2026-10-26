@@ -1,7 +1,7 @@
 <?xml version="1.1" encoding="UTF-8"?>
 <!DOCTYPE keyboard SYSTEM "file://localhost/System/Library/DTDs/KeyboardLayout.dtd">
 <!--Last edited by Ukelele version 396 on 2025-02-20 at 19:24 (CET)-->
-<keyboard group="126" id="-11214" name="us-altgr-intl" maxout="2">
+<keyboard group="126" id="-11214" name="Rod International" maxout="2">
     <layouts>
         <layout first="0" last="17" mapSet="16c" modifiers="f4"/>
         <layout first="18" last="18" mapSet="984" modifiers="f4"/>
@@ -383,7 +383,7 @@
             <key code="1" output="ß"/>
             <key code="2" output="ð"/>
             <key code="3" output=""/>
-            <key code="4" output=""/>
+            <key code="4" output="←"/>
             <key code="5" output=""/>
             <key code="6" output="æ"/>
             <key code="7" output="œ"/>
@@ -406,7 +406,7 @@
             <key code="24" output="×"/>
             <key code="25" output="‘"/>
             <key code="26" action="a46"/>
-            <key code="27" output="¥"/>
+            <key code="27" output="—"/>
             <key code="28" action="a49"/>
             <key code="29" output="’"/>
             <key code="30" output="»"/>
@@ -416,10 +416,10 @@
             <key code="34" output="í"/>
             <key code="35" output="ö"/>
             <key code="36" output="&#x000D;"/>
-            <key code="37" output="ø"/>
-            <key code="38" output="ï"/>
+            <key code="37" output="→"/>
+            <key code="38" output="↓"/>
             <key code="39" action="a36"/>
-            <key code="40" output="œ"/>
+            <key code="40" output="↑"/>
             <key code="41" output="¶"/>
             <key code="42" output="¬"/>
             <key code="43" output="ç"/>
@@ -518,7 +518,7 @@
             <key code="24" output="÷"/>
             <key code="25" action="a39"/>
             <key code="26" output="½"/>
-            <key code="27" action="a47"/>
+            <key code="27" output="–"/>
             <key code="28" output="¾"/>
             <key code="29" action="a43"/>
             <key code="30" output="”"/>
