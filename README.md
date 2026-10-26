@@ -124,6 +124,22 @@ After applying your macOS config:
 2. If prompted, grant Accessibility permission in macOS settings.
 3. Use the Hammerspoon menu bar icon and click `Reload Config`.
 
+## Ukelele Keyboard Layout
+
+The `us-altgr-intl` layout is tracked in `config/ukelele/` and is not installed
+by Home Manager. It was originally based on
+[carjorvaz/macos-us-altgr-intl](https://github.com/carjorvaz/macos-us-altgr-intl);
+I plan to make personal changes to the layout here.
+
+To use it on macOS:
+
+1. Copy `config/ukelele/us-altgr-intl.keylayout` to
+   `/Library/Keyboard Layouts/` (administrator access required), or to
+   `~/Library/Keyboard Layouts/` for the current user.
+2. Log out and back in if the layout does not appear.
+3. Open **System Settings → Keyboard → Text Input → Edit**, click **+**, and
+   add **us-altgr-intl** as an input source.
+
 ## Git
 
 Create a `~/.gitconfig.local` file with the user you want:
