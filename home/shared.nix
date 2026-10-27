@@ -69,7 +69,7 @@ in
       {
         plugin = resurrect;
         extraConfig = ''
-          set -g @resurrect-processes '"~copilot->copilot"'
+          set -g @resurrect-processes '"~/bin/nvim->nvim *" "~copilot->copilot"'
           set -g @resurrect-strategy-nvim 'session'
           set -g @resurrect-strategy-vim 'session'
         '';
