@@ -89,6 +89,7 @@ in
       lt = "eza --tree --level=2 --icons=auto";
       cd = "z";
       gs = "git status";
+      vimlight = "vim -u NONE -i NONE -n";
       doom = "${doomCorePath}/bin/doom";
       new-nix-project = "${config.home.homeDirectory}/dotfiles/scripts/new-nix-project.sh";
       utfnow = "date -u +%Y%m%dT%H%M%S";
@@ -132,7 +133,7 @@ in
   programs.neovim = {
     enable = true;
     defaultEditor = true;
-    viAlias = true;
+    viAlias = false;
     vimAlias = true;
     withNodeJs = true;
     withPython3 = false;
