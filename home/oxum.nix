@@ -120,6 +120,18 @@ in
           eval "$(~/.local/bin/kiro-cli init zsh post --rcfile zshrc)"
         fi
       '')
+      (lib.mkOrder 2000 ''
+        # Restore local/Nix precedence after macOS path_helper and Homebrew
+        # reorder PATH, so commands such as git use Nix instead of Apple's tools.
+        # Keep remaining directories, removing duplicates with Zsh's unique array.
+        typeset -U path PATH
+        path=(
+          "$HOME/.local/bin"
+          "$HOME/.nix-profile/bin"
+          /nix/var/nix/profiles/default/bin
+          $path
+        )
+      '')
     ];
   };
 
