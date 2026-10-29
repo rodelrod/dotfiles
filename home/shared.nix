@@ -101,6 +101,8 @@ in
     initContent = ''
       setopt extendedglob
 
+      source <(just --completions zsh)
+
       # Ghostty sends ESC [ 3 ~ for forward delete; make ZLE consume it.
       zmodload zsh/terminfo 2>/dev/null || true
       [[ -n "''${terminfo[kdch1]}" ]] && bindkey "''${terminfo[kdch1]}" delete-char
@@ -152,6 +154,7 @@ in
     gopls
     graphviz
     htop
+    just
     nodejs
     typescript
     typescript-language-server
