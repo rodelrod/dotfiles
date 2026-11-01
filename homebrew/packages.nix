@@ -9,6 +9,11 @@
     "ollama"
     "emacs-plus@30"  # Emacs with native-comp support via libgccjit.
     "gemini-cli"
+    # Docker Engine runs inside Colima's Linux VM on macOS.
+    "colima"
+    "docker"
+    "docker-compose"
+    "docker-buildx"
   ];
 
   sharedCasks = [

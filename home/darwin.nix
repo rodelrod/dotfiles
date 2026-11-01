@@ -1,6 +1,13 @@
 { config, pkgs, lib, ... }:
 
 {
+  # Both Apple Silicon hosts use /opt/homebrew. Keep Docker's config.json
+  # writable (contexts/authentication) and expose Brew plugins via user links.
+  home.file.".docker/cli-plugins/docker-compose".source =
+    config.lib.file.mkOutOfStoreSymlink "/opt/homebrew/opt/docker-compose/bin/docker-compose";
+  home.file.".docker/cli-plugins/docker-buildx".source =
+    config.lib.file.mkOutOfStoreSymlink "/opt/homebrew/opt/docker-buildx/bin/docker-buildx";
+
   # Install reusable Karabiner complex modifications, but leave karabiner.json unmanaged.
   xdg.configFile."karabiner/assets/complex_modifications" = {
     source = ../config/karabiner/assets/complex_modifications;

@@ -63,6 +63,37 @@ home-manager switch --flake .#xenakis
 
 ## Daily usage
 
+### Docker on macOS (kubrick and oxum)
+
+Homebrew installs Colima, Docker CLI, Compose, and Buildx from the shared
+`homebrew/packages.nix` list. The shared macOS Home Manager module links the
+plugins into `~/.docker/cli-plugins`, leaving Docker's authentication and context
+configuration writable. Both hosts use Homebrew at `/opt/homebrew`.
+
+On kubrick, apply with `sudo darwin-rebuild switch --flake .#kubrick`.
+Oxum currently uses the standalone Home Manager configuration: apply with
+`home-manager switch --flake .#oxum`, then
+`brew bundle --file ~/.config/homebrew/Brewfile`. Administrator access does not
+change which configuration this flake defines for oxum.
+
+Colima runs on demand, without a system service or privileged networking
+configuration:
+
+```bash
+colima start
+docker run --rm hello-world
+docker compose version
+docker buildx version
+
+# Stop the VM when finished (containers and images are retained).
+colima stop
+```
+
+Docker uses the `colima` context after startup. If another tool changes it,
+restore it with `docker context use colima`.
+
+### Apply configuration
+
 ```bash
 # apply macOS nix-darwin config
 sudo darwin-rebuild switch --flake .#kubrick
