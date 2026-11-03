@@ -20,6 +20,12 @@ in
   # Primary user for user-scoped nix-darwin options (e.g. homebrew.enable)
   system.primaryUser = "rodelrod";
 
+  # Expose Homebrew CLI tools installed on Apple Silicon.
+  environment.systemPath = [
+    "/opt/homebrew/bin"
+    "/opt/homebrew/sbin"
+  ];
+
   # System packages (installed system-wide)
   environment.systemPackages = with pkgs; [
     # Add system-level packages here if needed
