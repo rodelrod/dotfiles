@@ -155,6 +155,7 @@ in
     graphviz
     htop
     just
+    nil # Nix language server used by LazyVim (nil_ls)
     nodejs
     typescript
     typescript-language-server
