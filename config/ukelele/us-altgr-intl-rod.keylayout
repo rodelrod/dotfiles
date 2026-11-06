@@ -407,7 +407,7 @@
             <key code="25" output="‘"/>
             <key code="26" action="a46"/>
             <key code="27" output="—"/>
-            <key code="28" action="a49"/>
+            <key code="28" output="×"/>
             <key code="29" output="’"/>
             <key code="30" output="»"/>
             <key code="31" output="ó"/>
@@ -420,7 +420,7 @@
             <key code="38" output="↓"/>
             <key code="39" action="a36"/>
             <key code="40" output="↑"/>
-            <key code="41" output="¶"/>
+            <key code="41" output="…"/>
             <key code="42" output="¬"/>
             <key code="43" output="ç"/>
             <key code="44" output="¿"/>
