@@ -23,6 +23,7 @@
     "dbeaver-community"
     "drawio"
     "ghostty"
+    "google-gemini"
     "hammerspoon"
     "insomnia"
     "intellij-idea"
