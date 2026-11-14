@@ -262,11 +262,12 @@ Schedules:
 
 `full-sync` mode:
 
+- abort with a local notification if the repo is conflicted or mid-rebase/merge/cherry-pick
+- auto-commit local changes with an Ollama-generated Org-focused commit message before fetching
 - `git fetch origin`
-- abort with a local notification if the repo is conflicted, mid-rebase/merge/cherry-pick, or dirty while behind upstream
+- abort if new local edits appear during the run while the branch is behind upstream
 - `git pull --ff-only` when the repo is clean and behind
 - `git pull --rebase` when the repo has both local commits and remote commits
-- auto-commit local changes with an Ollama-generated Org-focused commit message when the repo is not behind
 - `git push origin` only when the branch is ahead and not diverged
 
 It never runs a plain `git pull` and never creates merge commits automatically.

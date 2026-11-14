@@ -337,16 +337,21 @@ run_full_sync_mode() {
     abort_with_notification "No upstream branch is configured for $repo_root."
   fi
 
-  if ! git_org fetch origin >> "$RUN_LOG" 2>&1; then
-    abort_with_notification "git fetch origin failed for $repo_root."
-  fi
-
   if has_unmerged_files; then
     abort_with_notification "Org sync aborted: unmerged files are present in $repo_root."
   fi
 
   if has_in_progress_operation; then
     abort_with_notification "Org sync aborted: merge, rebase, or cherry-pick is already in progress in $repo_root."
+  fi
+
+  # Preserve local edits before reconciling changes from another machine.
+  if has_worktree_changes; then
+    create_commit
+  fi
+
+  if ! git_org fetch origin >> "$RUN_LOG" 2>&1; then
+    abort_with_notification "git fetch origin failed for $repo_root."
   fi
 
   update_ahead_behind
@@ -372,10 +377,6 @@ run_full_sync_mode() {
     else
       abort_with_notification "Org sync aborted: fast-forward pull failed for $repo_root."
     fi
-  fi
-
-  if (( BEHIND_COUNT == 0 )) && has_worktree_changes; then
-    create_commit
   fi
 
   update_ahead_behind
