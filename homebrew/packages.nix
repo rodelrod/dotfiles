@@ -29,6 +29,7 @@
     "intellij-idea"
     "libreoffice"
     "meld"
+    "obsidian"
     "raycast"
     "ukelele"
     "visual-studio-code"

@@ -92,6 +92,28 @@ colima stop
 Docker uses the `colima` context after startup. If another tool changes it,
 restore it with `docker context use colima`.
 
+### Obsidian on macOS (kubrick and oxum)
+
+Obsidian is installed through the shared cask list in `homebrew/packages.nix`,
+alongside the standalone draw.io and XMind apps.
+
+Open or create a vault in Obsidian, then go to **Settings → Community plugins**,
+turn on community plugins, and use **Browse** to install and enable:
+
+| Plugin | Author | Plugin ID | Purpose |
+| --- | --- | --- | --- |
+| [Excalidraw](https://github.com/zsviczian/obsidian-excalidraw-plugin) | zsviczian | `obsidian-excalidraw-plugin` | Create and edit drawings |
+| [draw.io](https://community.obsidian.md/plugins/drawio) | somesanity | `drawio` | Create and edit diagrams offline |
+| [XMind Maps](https://community.obsidian.md/plugins/xmind-maps) | yuanzhixiang | `xmind-maps` | View and embed local `.xmind` files |
+
+Plugins are installed per vault. XMind Maps is read-only; use the standalone
+XMind app to edit mind maps. Store `.xmind` files inside the vault to open them
+or embed them in notes with `![[Map.xmind]]`.
+
+Keep each vault's `.obsidian/` directory writable and manage plugin updates
+through Obsidian's community plugin settings. This repo documents the plugin
+list; Home Manager does not manage or symlink the vault's settings or plugins.
+
 ### Apply configuration
 
 ```bash
