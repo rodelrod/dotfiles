@@ -24,6 +24,7 @@
     "drawio"
     "ghostty"
     "google-gemini"
+    "grandperspective"
     "hammerspoon"
     "insomnia"
     "intellij-idea"
