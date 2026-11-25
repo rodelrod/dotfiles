@@ -167,6 +167,7 @@ in
     pcre2
     postgresql
     pwgen
+    python3Packages.ipython
     pyright
     ripgrep
     scc
